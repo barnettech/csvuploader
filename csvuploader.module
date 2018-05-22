@@ -104,7 +104,27 @@ function csvuploader_form_submit($form, &$form_state) {
    foreach ($lines as $line) {
      $array[] = str_getcsv($line);
    }
-   dpm($array); 
+   dpm($array);
+
+   foreach($array as $userdata) {
+     if($userdata[0] != 'ID') {
+       $new_user = array(
+         'name' => $userdata[4],
+         'pass' => 'passwordnsf', // note: do not md5 the password
+         'mail' => $userdata[2],
+         'status' => 1,
+         'init' => $userdata[2],
+         'roles' => array(
+           DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+           3 => 'custom role',
+         ),
+      );
+
+      // The first parameter is sent blank so a new user is created.
+      user_save('', $new_user); 
+
+     }
+   } 
 
    drupal_set_message('CSV has been uploaded.');
 
