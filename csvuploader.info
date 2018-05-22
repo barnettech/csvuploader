@@ -1,0 +1,4 @@
+name = CSV Uploader
+description = A form to upload a csv and create users en bulk
+package = NSF Custom Development 
+core = 7.x
