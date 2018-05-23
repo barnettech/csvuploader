@@ -1,0 +1,146 @@
+<?php
+
+/**
+* @file
+* Module for managing csv uploader.
+*/
+
+
+/**
+* Implementation of hook_install().
+*/
+function csvuploader_install() {
+  // Use schema API to create database table.
+  drupal_install_schema('csvuploader');
+}
+
+
+
+/**
+* Implementation of hook_uninstall().
+*/
+function csvuploader_uninstall() {
+  // Remove tables.
+  drupal_uninstall_schema('csvuploader');
+}
+
+/**
+* Implementation of hook_schema().
+*/
+function csvuploader_schema(){
+    $schema['csvuploader'] = array(
+        'description' => 'The table for storing the user data uploaded via csv.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for uploaded user.',
+                'type' => 'serial',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ),
+            'eventid' => array(
+                'description' => 'the event id, to be entered by the administrator.',
+                'type' => 'int',
+                'not null' => FALSE,
+            ),
+            'eventtitle' => array(
+                'description' => 'Event Title.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => '',
+            ),
+            'salutation' => array(
+                'description' => 'Salutation, Mr or Mrs only',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => FALSE,
+                'default' => '',
+            ),
+            'firstname' => array(
+                'description' => 'Subscriber name.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'lastname' => array(
+                'description' => 'Subscriber name.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'title' => array(
+                'description' => 'Title.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => '',
+            ),
+            'emailaddress' => array(
+                'description' => 'Subscriber email.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'phonenumber' => array(
+                'description' => 'phone number of the contact.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => '',
+            ),
+            'company_name' => array(
+                'description' => 'The company name of the contact.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'companyid' => array(
+                'description' => 'the company id, to be entered by the administrator.',
+                'type' => 'int',
+                'not null' => FALSE,
+            ),
+            'streetaddress' => array(
+                'description' => 'The street address of the contact.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => 1,
+            ),
+            'city' => array(
+                'description' => 'The city of the contact.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => 1,
+            ),
+            'state' => array(
+                'description' => 'The state of the contact.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => 1,
+            ),
+            'zip' => array(
+                'description' => 'The city of the contact.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => 1,
+            ),
+            'country' => array(
+                'description' => 'The country of the contact.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => FALSE,
+                'default' => 1,
+            ),
+
+        ),
+        'primary key' => array('id'),
+    );
+    return $schema;
+}
